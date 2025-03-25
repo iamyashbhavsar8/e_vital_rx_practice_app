@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "726035015996",
+    "project_id": "my-phone-auth-firebase-10cbc",
+    "storage_bucket": "my-phone-auth-firebase-10cbc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:726035015996:android:4f7f45ef52055e66b2d639",
+        "android_client_info": {
+          "package_name": "com.example.e_vital_rx"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAJDW7kX3s_mnbBGtXyIKvT3LSxLqgCwY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:726035015996:android:822a1c8caa5772b1b2d639",
+        "android_client_info": {
+          "package_name": "com.example.pixelwibes_demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAJDW7kX3s_mnbBGtXyIKvT3LSxLqgCwY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,42 @@
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+
+class DynamicLinksService {
+  static final DynamicLinksService _singleton = DynamicLinksService._internal();
+
+  factory DynamicLinksService() => _singleton;
+
+  DynamicLinksService._internal();
+
+  static Future<String> createDynamicLink(
+      {required String link,
+      String? campaign,
+      String? source,
+      String? medium}) async {
+    final DynamicLinkParameters parameters = DynamicLinkParameters(
+      uriPrefix: 'https://yourapp.page.link',
+      link: Uri.parse(link),
+      androidParameters: const AndroidParameters(
+        packageName: 'com.example.app',
+        minimumVersion: 1,
+      ),
+      iosParameters: const IOSParameters(
+        bundleId: 'com.example.app',
+        minimumVersion: '1.0.0',
+      ),
+      socialMetaTagParameters: SocialMetaTagParameters(
+        title: 'Check out this link!',
+        description: 'Join us using this special link!',
+        imageUrl: Uri.parse('https://your-image-url.com/image.png'),
+      ),
+      googleAnalyticsParameters: GoogleAnalyticsParameters(
+        campaign: campaign ?? 'default_campaign',
+        source: source ?? 'default_source',
+        medium: medium ?? 'default_medium',
+      ),
+    );
+
+    final ShortDynamicLink shortDynamicLink =
+        await FirebaseDynamicLinks.instance.buildShortLink(parameters);
+    return shortDynamicLink.shortUrl.toString();
+  }
+}

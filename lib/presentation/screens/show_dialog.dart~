@@ -1,0 +1,72 @@
+import 'package:e_vital_rx/widgets/text_form_fields.dart';
+import 'package:e_vital_rx/widgets/text_view.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../business_logic/dashboard_screen/dashboard_screen_cubit.dart';
+import '../../model/data_model/data_model.dart';
+import '../../utils/colors.dart';
+
+showAddNameDialog({
+  required BuildContext context,
+  required DataModel dataModel,
+  required DashboardScreenCubit dashboardScreenCubit,
+  required Function onUpdateTap,
+}) async {
+  await showDialog(
+    context: context,
+    builder: (context) => Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: fontGrey, width: 1),
+      ),
+      child: AlertDialog(
+        surfaceTintColor: projectWhite,
+        backgroundColor: projectWhite,
+        title: Padding(
+          padding: EdgeInsets.only(top: 15.h),
+          child: TextView(
+            data: dataModel.name,
+            style: TextStyle(color: projectBlack, fontSize: 16.sp),
+          ),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Card(
+              child: StreamBuilder(
+                stream: dashboardScreenCubit.rupeeStream,
+                builder: (context, snapshot) {
+                  return TextFormFields(
+                    controller: dashboardScreenCubit.controllerRupee,
+                    textLabel: "updateRupee".tr(),
+                    onSomeChanged: (value) =>
+                        dashboardScreenCubit.rupeeValidate(rupee: value),
+                    textInputType: TextInputType.number,
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 10.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text("cancel".tr()),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    onUpdateTap();
+                  },
+                  child: Text("update".tr()),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
